@@ -1,6 +1,8 @@
 from ImageProcessing import ImageProcessing
 from AStar import AStar
 import random
+import cv2
+import numpy as np
 class PRM(object):
     def __init__(self): 
         #represent graph as Ajacency list
@@ -109,6 +111,7 @@ class PRM(object):
             neighbors = []
             for j in range(numberOfPoints):
                 if self.vertex[i][2] < 50 or self.vertex[j][2] < 50:  
+                    pass
                 elif i == j: 
                     pass        
                 elif self.isWayBlocked(self.vertex[i][1], self.vertex[j][1]):
@@ -133,4 +136,11 @@ class PRM(object):
         AstarInstance = AStar()
         resultRoad = AstarInstance.run(self.graph, source, target, "temp.txt")
         return resultRoad
+
+    def draw(self,result):
+        test = cv2.imread('test.jpg')
+        for (index, (x,y)) in result:
+            cv2.circle(test, (x,y), 3, (0,0,255)) 
+        cv2.imshow('images',test)
+        cv2.waitKey(0)    
                                                   
