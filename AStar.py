@@ -18,7 +18,7 @@ class AStar(object):
                 fo.write(currentS[2]) 
                 
         pq = PriorityQueue()
-        startS = (e_dis(start,end), 0.0, start, None)
+        startS = (e_dis(start[1],end[1]), 0.0, start, None)
         pq.put(startS);
         popNumber = 0 
         while not pq.empty() : 
