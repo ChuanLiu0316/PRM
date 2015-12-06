@@ -32,11 +32,11 @@ class AStar(object):
                 fo.close()
                 return resultRoad 
             else: 
-                for neighbor in graph[currentS[0]]:     
+                for neighbor in graph[index]:     
                     h = e_dis(neighbor[1], end)
                     newcost = cost+e_dis(neighbor[1], (cx,cy))
                     f = h+g
-                    pq.put((f, newcost, neighbor[1],currentS[2]))
+                    pq.put((f, newcost, neighbor,currentS[2]))
   
         #this shouldn't happen    
         return -1    

@@ -115,13 +115,14 @@ class PRM(object):
                 elif self.isWayBlocked(self.vertex[i][1], self.vertex[j][1]):
                     pass
                 else:
+                    (tmpIndex, (tempX, tempY), NotImportant) = self.vertex[j] 
                     if i < j:
                         #add to Edge set
-                        neighbors.append(self.vertex[j])
+                        neighbors.append((tmpIndex, (tempX, tempY)))
                         self.edge.append((self.vertex[i], self.vertex[j]))
                     else: 
                         #already in edge set, just add to neighbors 
-                        neighbors.append(self.vertex[j])
+                        neighbors.append((tmpIndex, (tempX, tempY)))
             
             self.graph.append(neighbors)   
         return 0 
