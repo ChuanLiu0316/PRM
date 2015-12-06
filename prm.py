@@ -41,7 +41,7 @@ class PRM(object):
                 for offset in range(-self.botRadius+1, self.botRadius+1):
                     if outOfIndex(currentX+offset, currentY):
                         pass 
-                    elif  self.TwoDMatrix[currentY][currentX+offset] > 200: 
+                    elif  self.TwoDMatrix[currentY][currentX+offset] < 50: 
                         return True  
                     else:
                         pass
@@ -52,7 +52,7 @@ class PRM(object):
                 for offset in range(-self.botRadius+1, self.botRadius+1):
                     if outOfIndex(currentX, currentY+offset): 
                         pass
-                    elif  self.TwoDMatrix[currentY+offset][currentX] > 200: 
+                    elif  self.TwoDMatrix[currentY+offset][currentX] < 50: 
                         return True
                     else:
                         pass    
@@ -63,7 +63,7 @@ class PRM(object):
                 for offset in range(-self.botRadius+1, self.botRadius+1):
                     if outOfIndex(currentX, currentY+offset): 
                         pass
-                    elif  self.TwoDMatrix[currentY+offset][currentX] > 200: 
+                    elif  self.TwoDMatrix[currentY+offset][currentX] < 50: 
                         return True
                     else:
                         pass 
@@ -73,7 +73,7 @@ class PRM(object):
                 for offset in range(-self.botRadius+1, self.botRadius+1):
                     if outOfIndex(currentX+offset, currentY):
                         pass 
-                    elif  self.TwoDMatrix[currentY][currentX+offset] > 200: 
+                    elif  self.TwoDMatrix[currentY][currentX+offset] < 50: 
                         return True  
                     else:
                         pass         
@@ -98,7 +98,7 @@ class PRM(object):
             x = random.randint(0, width-1)
             y = random.randint(0, height-1)
             #if on obstacle 
-            if self.TwoDMatrix[y][x] > 200:
+            if self.TwoDMatrix[y][x] < 50:
                 #decrease index for consistency 
                 i = i -1
             else:
@@ -108,7 +108,7 @@ class PRM(object):
         for i in range(numberOfPoints):
             neighbors = []
             for j in range(numberOfPoints):
-                if self.vertex[i][2] > 200 or self.vertex[j][2] > 200:  
+                if self.vertex[i][2] < 50 or self.vertex[j][2] < 50:  
                 elif i == j: 
                     pass        
                 elif self.isWayBlocked(self.vertex[i][1], self.vertex[j][1]):
