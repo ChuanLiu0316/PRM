@@ -1,5 +1,6 @@
-import random 
 from ImageProcessing import ImageProcessing
+from AStar import AStar
+import random
 class PRM(object):
     def __init__(self): 
         #represent graph as Ajacency list
@@ -10,8 +11,12 @@ class PRM(object):
         #vertex[0] := index, vertex[1] := (x,y), vertex[2]: grayscale
         #need to do G[y][x], index from 0 to numberOfPoints, easy to get. 
         self.edge = None #Edge Set, may not be neccessary 
-        self.2DMatrix = None
+        self.TwoDMatrix = None
         self.botRadius = 0
+
+    # isWayBlocked : ((int, int), (int, int)) -> bool
+    # isWayBlocked, given two point in the Image, check if the line between 
+    # the two point is blocked by obstacles  
     def isWayBlocked((x1, y1), (x2, y2)): 
         x1 = float(x1) 
         x2 = float(x2)     
@@ -21,20 +26,26 @@ class PRM(object):
         for currentX in range(int(x1), int(x2)):
             currentY = int(y1 + slope * (currentX - x1))
             for offset in range(-self.botRadius+1, self.botRadius+1):
-                if  self.2DMatrix[currentY][currentX] > 200: 
+                if  self.TwoDMatrix[currentY][currentX] > 200: 
                     return True
 
         return False                 
 
+
+    #initialize : (file, int, int) -> 0  (if no problem)
+    # initialize, given a imageFilename, and how many points you want to generate
+    # for the PRM, and the botRadius, initialize all the values of the instance,
+    # especially, an ajacency list to represent a graph spreading whole image,
+    # if there is no obstacle between two vertex, then there is an edge bewteen them 
     def initialize(imageName, numberOfPoints, botRadius):
         #extract value from image
         ImgMatrix = ImageProcessing.TranformJPGto2DArray(imageName)
-        self.2DMatrix = ImgMatrix
+        self.TwoDMatrix = ImgMatrix
         height = len(ImgMatrix)
         width = len(ImgMatrix[0])
         for i in range(numberOfPoints):
-            x = random.(0, width)
-            y = random.(0, height)
+            x = random.randint(0, width)
+            y = random.randint(0, height)
             #if on obstacle 
             if self.vertex[i][2] > 200:
                 #decrease index for consistency 
@@ -45,9 +56,9 @@ class PRM(object):
         for i in range(numberOfPoints):
             neighbors = []
             for j in range(numberOfPoints):
-                if self.vertex[i][2] > 200 || self.vertex[j][2] > 200
+                if self.vertex[i][2] > 200 or self.vertex[j][2] > 200:
                     print "for debugging, this shouldn't happen"    
-                elif i = j: 
+                elif i == j: 
                     pass        
                 elif isWayBlocked(self.vertex[i][2], self.vertex[j][2]):
                     pass
@@ -61,4 +72,12 @@ class PRM(object):
                         neighbors.append(self.vertex[j])
             
             self.append(neighbors)   
-        return 0                                       
+        return 0 
+
+    # findWay ((x,y), (x,y))
+    # findWay, given a source coordinates, based on the Probabilistic Road Map,
+    # using A* algorithm      
+    def findWay(source, target): 
+        resultRoad = AStar.run(self.graph, source, target, "temp.txt")
+        return resultRoad
+                                                  
