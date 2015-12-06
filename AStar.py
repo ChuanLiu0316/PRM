@@ -1,4 +1,5 @@
 from Queue import PriorityQueue
+import math
 class AStar(object):
     @staticmethod
     def run(graph, start, end, outfile):
