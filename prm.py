@@ -5,12 +5,12 @@ class PRM(object):
     def __init__(self): 
         #represent graph as Ajacency list
         # to get all neighbors, just call self.graph[index]
-        self.graph = None
-        self.vertex = None
+        self.graph = []
+        self.vertex = []
         #Vertex Set, vertex as form (index, (x, y), grayscale), remember to get value of (x,y)
         #vertex[0] := index, vertex[1] := (x,y), vertex[2]: grayscale
         #need to do G[y][x], index from 0 to numberOfPoints, easy to get. 
-        self.edge = None #Edge Set, may not be neccessary 
+        self.edge = [] #Edge Set, may not be neccessary 
         self.TwoDMatrix = None
         self.botRadius = 0
 
@@ -44,15 +44,17 @@ class PRM(object):
         self.TwoDMatrix = ImgMatrix
         height = len(ImgMatrix)
         width = len(ImgMatrix[0])
-        for i in range(numberOfPoints):
-            x = random.randint(0, width)
-            y = random.randint(0, height)
+        i = 0
+        while (i < 1000):
+            x = random.randint(0, width-1)
+            y = random.randint(0, height-1)
             #if on obstacle 
-            if self.vertex[i][2] > 200:
+            if self.TwoDMatrix[y][x] > 200:
                 #decrease index for consistency 
-                i = i-1
+                i = i -1
             else:
                 self.vertex.append((i, (x,y), ImgMatrix[y][x]))
+            i = i+1       
 
         for i in range(numberOfPoints):
             neighbors = []
@@ -61,13 +63,13 @@ class PRM(object):
                     print "for debugging, this shouldn't happen"    
                 elif i == j: 
                     pass        
-                elif isWayBlocked(self.vertex[i][2], self.vertex[j][2]):
+                elif self.isWayBlocked(self.vertex[i][1], self.vertex[j][1]):
                     pass
                 else:
                     if i < j:
                         #add to Edge set
                         neighbors.append(self.vertex[j])
-                        edges.append(self.vertex[i], self.vertex[j])
+                        self.edge.append((self.vertex[i], self.vertex[j]))
                     else: 
                         #already in edge set, just add to neighbors 
                         neighbors.append(self.vertex[j])
