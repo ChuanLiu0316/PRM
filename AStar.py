@@ -21,10 +21,12 @@ class AStar(object):
         print startS
         pq.put(startS);
         popNumber = 0 
+        X = [False]*len(graph)
         while not pq.empty() : 
             currentS = pq.get()
             popNumber = popNumber+1
             (index, (cx,cy)) = currentS[2]
+            X[index] = True
             cost = currentS[1]
             if (cx,cy) == end[1]: 
                 #fo.write(str(popNumber))
@@ -33,11 +35,14 @@ class AStar(object):
                 #fo.close()
                 return resultRoad 
             else: 
-                for neighbor in graph[index]:     
-                    h = e_dis(neighbor[1], end[1])
-                    newcost = cost+e_dis(neighbor[1], (cx,cy))
-                    f = h+newcost
-                    pq.put((f, newcost, neighbor,currentS))
+                for neighbor in graph[index]:  
+                    if X[neighbor[0]]:
+                        pass
+                    else:    
+                        h = e_dis(neighbor[1], end[1])
+                        newcost = cost+e_dis(neighbor[1], (cx,cy))
+                        f = h+newcost
+                        pq.put((f, newcost, neighbor,currentS))
   
         #this shouldn't happen    
         return -1    
