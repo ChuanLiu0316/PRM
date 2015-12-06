@@ -37,7 +37,7 @@ class AStar(object):
                 for neighbor in graph[index]:     
                     h = e_dis(neighbor[1], end[1])
                     newcost = cost+e_dis(neighbor[1], (cx,cy))
-                    f = h+g
+                    f = h+newcost
                     pq.put((f, newcost, neighbor,currentS[2]))
   
         #this shouldn't happen    
