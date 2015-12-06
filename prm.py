@@ -17,7 +17,7 @@ class PRM(object):
     # isWayBlocked : ((int, int), (int, int)) -> bool
     # isWayBlocked, given two point in the Image, check if the line between 
     # the two point is blocked by obstacles  
-    def isWayBlocked((x1, y1), (x2, y2)): 
+    def isWayBlocked(self, (x1, y1), (x2, y2)): 
         x1 = float(x1) 
         x2 = float(x2)     
         y1 = float(y1)  
@@ -37,9 +37,10 @@ class PRM(object):
     # for the PRM, and the botRadius, initialize all the values of the instance,
     # especially, an ajacency list to represent a graph spreading whole image,
     # if there is no obstacle between two vertex, then there is an edge bewteen them 
-    def initialize(imageName, numberOfPoints, botRadius):
+    def initialize(self, imageName, numberOfPoints, botRadius):
         #extract value from image
-        ImgMatrix = ImageProcessing.TranformJPGto2DArray(imageName)
+        ImgProInstance = ImageProcessing()
+        ImgMatrix = ImgProInstance.TranformJPGto2DArray(imageName)
         self.TwoDMatrix = ImgMatrix
         height = len(ImgMatrix)
         width = len(ImgMatrix[0])
@@ -77,7 +78,8 @@ class PRM(object):
     # findWay ((x,y), (x,y))
     # findWay, given a source coordinates, based on the Probabilistic Road Map,
     # using A* algorithm      
-    def findWay(source, target): 
-        resultRoad = AStar.run(self.graph, source, target, "temp.txt")
+    def findWay(self, source, target): 
+        AstarInstance = Astar()
+        resultRoad = AstarInstance.run(self.graph, source, target, "temp.txt")
         return resultRoad
                                                   
