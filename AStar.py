@@ -4,18 +4,17 @@ class AStar(object):
     @staticmethod
     def run(graph, start, end, outfile):
         resultRoad = []
-        fo = open(outfile, "w")
+        #fo = open(outfile, "w")
         def e_dis((cx,cy),(endx, endy)):
             return math.sqrt((endx-cx)*(endx-cx) + (endy-cy)*(endy-cy))
 
         def recursive_print(currentS):
-        
             if currentS[1] == 0 :
                 return
             else:
                 recursive_print(currentS[3])
                 resultRoad.append(currentS[2])
-                fo.write(currentS[2]) 
+                #fo.write(currentS[2]) 
                 
         pq = PriorityQueue()
         startS = (e_dis(start[1],end[1]), 0.0, start, None)
@@ -28,10 +27,10 @@ class AStar(object):
             (index, (cx,cy)) = currentS[2]
             cost = currentS[1]
             if (cx,cy) == end[1]: 
-                fo.write(str(popNumber))
-                fo.write("\n")
+                #fo.write(str(popNumber))
+                #fo.write("\n")
                 recursive_print(currentS)
-                fo.close()
+                #fo.close()
                 return resultRoad 
             else: 
                 for neighbor in graph[index]:     
