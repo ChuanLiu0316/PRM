@@ -35,26 +35,22 @@ class PRM(object):
         y2 = float(y2)
         if x1==x2 and y1==y2:
             return False
-
-        if x1 == x2:     
-            slopeXY = (x2 - x1)/(y2 - y1)            
+            
+        if x1 == x2:         
             for currentY in range(int(y1), int(y2)):
-                currentX = int(x1 + slopeXY * (currentY - y1))
-                for offset in range(-self.botRadius+1, self.botRadius+1):
-                    if outOfIndex(currentX+offset, currentY):
+                for offset in range(-self.botRadius, self.botRadius+2):
+                    if outOfIndex(x1+offset, currentY):
                         pass 
-                    elif  self.TwoDMatrix[currentY][currentX+offset] < 50: 
+                    elif  self.TwoDMatrix[currentY][x1+offset] < 50: 
                         return True  
                     else:
                         pass
         elif y1 == y2: 
-            slopeYX = (y2 - y1)/(x2 - x1)
             for currentX in range(int(x1), int(x2)):
-                currentY = int(y1 + slopeYX * (currentX - x1))
-                for offset in range(-self.botRadius+1, self.botRadius+1):
-                    if outOfIndex(currentX, currentY+offset): 
+                for offset in range(-self.botRadius, self.botRadius+2):
+                    if outOfIndex(currentX, y1+offset): 
                         pass
-                    elif  self.TwoDMatrix[currentY+offset][currentX] < 50: 
+                    elif  self.TwoDMatrix[y1+offset][currentX] < 50: 
                         return True
                     else:
                         pass    
@@ -62,7 +58,7 @@ class PRM(object):
             slopeYX = (y2 - y1)/(x2 - x1)
             for currentX in range(int(x1), int(x2)):
                 currentY = int(y1 + slopeYX * (currentX - x1))
-                for offset in range(-self.botRadius+1, self.botRadius+1):
+                for offset in range(-self.botRadius, self.botRadius+2):
                     if outOfIndex(currentX, currentY+offset): 
                         pass
                     elif  self.TwoDMatrix[currentY+offset][currentX] < 50: 
@@ -72,7 +68,7 @@ class PRM(object):
             slopeXY = (x2 - x1)/(y2 - y1)            
             for currentY in range(int(y1), int(y2)):
                 currentX = int(x1 + slopeXY * (currentY - y1))
-                for offset in range(-self.botRadius+1, self.botRadius+1):
+                for offset in range(-self.botRadius, self.botRadius+2):
                     if outOfIndex(currentX+offset, currentY):
                         pass 
                     elif  self.TwoDMatrix[currentY][currentX+offset] < 50: 
@@ -93,6 +89,7 @@ class PRM(object):
         ImgProInstance = ImageProcessing()
         ImgMatrix = ImgProInstance.TranformJPGto2DArray(imageName)
         self.TwoDMatrix = ImgMatrix
+        self.botRadius = botRadius
         height = len(ImgMatrix)
         width = len(ImgMatrix[0])
         i = 0
