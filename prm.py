@@ -123,7 +123,7 @@ class PRM(object):
                         #already in edge set, just add to neighbors 
                         neighbors.append(self.vertex[j])
             
-            self.append(neighbors)   
+            self.graph.append(neighbors)   
         return 0 
 
     # findWay ((x,y), (x,y))
