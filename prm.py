@@ -131,7 +131,7 @@ class PRM(object):
     # findWay, given a source coordinates, based on the Probabilistic Road Map,
     # using A* algorithm      
     def findWay(self, source, target): 
-        AstarInstance = Astar()
+        AstarInstance = AStar()
         resultRoad = AstarInstance.run(self.graph, source, target, "temp.txt")
         return resultRoad
                                                   
