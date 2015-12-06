@@ -108,8 +108,7 @@ class PRM(object):
         for i in range(numberOfPoints):
             neighbors = []
             for j in range(numberOfPoints):
-                if self.vertex[i][2] > 200 or self.vertex[j][2] > 200:
-                    print "for debugging, this shouldn't happen"    
+                if self.vertex[i][2] > 200 or self.vertex[j][2] > 200:  
                 elif i == j: 
                     pass        
                 elif self.isWayBlocked(self.vertex[i][1], self.vertex[j][1]):
