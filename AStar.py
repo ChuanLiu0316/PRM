@@ -27,7 +27,7 @@ class AStar(object):
             popNumber = popNumber+1
             (index, (cx,cy)) = currentS[2]
             cost = currentS[1]
-            if (cx,cy) == end: 
+            if (cx,cy) == end[1]: 
                 fo.write(str(popNumber))
                 fo.write("\n")
                 recursive_print(currentS)
