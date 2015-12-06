@@ -38,7 +38,7 @@ class AStar(object):
                     h = e_dis(neighbor[1], end[1])
                     newcost = cost+e_dis(neighbor[1], (cx,cy))
                     f = h+newcost
-                    pq.put((f, newcost, neighbor,currentS[2]))
+                    pq.put((f, newcost, neighbor,currentS))
   
         #this shouldn't happen    
         return -1    
