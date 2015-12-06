@@ -34,7 +34,7 @@ class AStar(object):
                 return resultRoad 
             else: 
                 for neighbor in graph[index]:     
-                    h = e_dis(neighbor[1], end)
+                    h = e_dis(neighbor[1], end[1])
                     newcost = cost+e_dis(neighbor[1], (cx,cy))
                     f = h+g
                     pq.put((f, newcost, neighbor,currentS[2]))
