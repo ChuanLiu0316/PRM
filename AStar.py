@@ -21,7 +21,7 @@ class AStar(object):
         print startS
         pq.put(startS);
         popNumber = 0 
-        X = [False]*len(graph)
+        X = [False]*(len(graph)+1)
         while not pq.empty() : 
             currentS = pq.get()
             popNumber = popNumber+1
